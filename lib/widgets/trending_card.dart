@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:newzshots/model/article.dart';
+import 'package:share/share.dart';
 
 class TrendingCard extends StatelessWidget {
   final Article trending;
@@ -50,7 +51,7 @@ class TrendingCard extends StatelessWidget {
             ),
             title: Text(trending.title),
             subtitle: Text(
-              'Author - ${trending.author}',
+              trending.author.isEmpty ? "" : 'Author - ${trending.author}',
               style: TextStyle(color: Colors.black.withOpacity(0.6)),
             ),
           ),
@@ -65,20 +66,16 @@ class TrendingCard extends StatelessWidget {
             alignment: MainAxisAlignment.start,
             children: [
               TextButton(
-                onPressed: () {
-                  // Perform some action
-                },
+                onPressed: () {},
                 child: const Text('open'),
               ),
               TextButton(
-                onPressed: () {
-                  // Perform some action
-                },
+                onPressed: () {},
                 child: const Text('goto'),
               ),
               TextButton(
                 onPressed: () {
-                  // Perform some action
+                  Share.share(trending.url);
                 },
                 child: const Text('share'),
               ),
