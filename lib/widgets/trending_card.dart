@@ -7,13 +7,20 @@ class TrendingCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final uri = Uri.parse(trending.url);
+    uri.host; // www.wikipedia.org
     return Card(
       clipBehavior: Clip.antiAlias,
       child: Column(
         children: [
-          Image.network(
-            trending.urlToImage,
-          ),
+          trending.urlToImage.isEmpty
+              ? Image.asset(
+                  'images/logo.png',
+                  height: 300,
+                )
+              : Image.network(
+                  trending.urlToImage,
+                ),
           ListTile(
             leading: Container(
               width: 40.0,
@@ -22,11 +29,11 @@ class TrendingCard extends StatelessWidget {
                 shape: BoxShape.circle,
                 image: DecorationImage(
                   fit: BoxFit.fill,
-                  image: NetworkImage(
-                    trending.sourceName.contains('.com')
-                        ? 'https://newzshots.herokuapp.com/img/${trending.sourceName.replaceAll(" ", '')}'
-                        : 'https://newzshots.herokuapp.com/img/${trending.sourceName.replaceAll(" ", '')}.com',
-                  ),
+                  image: trending.sourceName == "YouTube"
+                      ? const NetworkImage(
+                          'https://brandlogos.net/wp-content/uploads/2020/03/YouTube-icon-SVG-512x512.png')
+                      : NetworkImage(
+                          'https://newzshots.herokuapp.com/img/${uri.host.replaceAll('www.', '')}'),
                 ),
               ),
             ),

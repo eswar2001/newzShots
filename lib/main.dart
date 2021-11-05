@@ -46,58 +46,58 @@ class _MyHomeState extends State<MyHome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: SafeArea(
-          child: SizedBox.expand(
-            child: PageView(
-              controller: _pageController,
-              onPageChanged: (index) {
-                setState(() => _currentIndex = index);
-              },
-              children: <Widget>[
-                const TrendingPage(),
-                const LocationPage(),
-                const SourcePage(),
-                Container(
-                  color: Colors.blue,
-                ),
-              ],
-            ),
+      body: SafeArea(
+        child: SizedBox.expand(
+          child: PageView(
+            controller: _pageController,
+            onPageChanged: (index) {
+              setState(() => _currentIndex = index);
+            },
+            children: <Widget>[
+              const TrendingPage(),
+              const LocationPage(),
+              const SourcePage(),
+              Container(
+                color: Colors.blue,
+              ),
+            ],
           ),
         ),
-        bottomNavigationBar: BottomNavyBar(
-          backgroundColor: Colors.white,
-          selectedIndex: _currentIndex,
-          showElevation: true, // use this to remove appBar's elevation
-          onItemSelected: (index) => setState(() {
-            _currentIndex = index;
-            _pageController.animateToPage(index,
-                duration: const Duration(milliseconds: 300),
-                curve: Curves.ease);
-          }),
-          items: [
-            BottomNavyBarItem(
-              icon: const Icon(Icons.trending_up_rounded),
-              title: const Text(
-                'Article',
-                style: TextStyle(color: Colors.black),
-              ),
-              activeColor: Colors.redAccent,
+      ),
+      bottomNavigationBar: BottomNavyBar(
+        backgroundColor: Colors.white,
+        selectedIndex: _currentIndex,
+        showElevation: true, // use this to remove appBar's elevation
+        onItemSelected: (index) => setState(() {
+          _currentIndex = index;
+          _pageController.animateToPage(index,
+              duration: const Duration(milliseconds: 300), curve: Curves.ease);
+        }),
+        items: [
+          BottomNavyBarItem(
+            icon: const Icon(Icons.trending_up_rounded),
+            title: const Text(
+              'Article',
+              style: TextStyle(color: Colors.black),
             ),
-            BottomNavyBarItem(
-                icon: const Icon(Icons.location_city_rounded),
-                title: const Text('Location'),
-                activeColor: Colors.black),
-            BottomNavyBarItem(
-                icon: const Icon(Icons.source_rounded),
-                title: const Text('Source'),
-                activeColor: Colors.black),
-            BottomNavyBarItem(
-                icon: const Icon(Icons.settings),
-                title: const Text(
-                  'Settings',
-                ),
-                activeColor: Colors.black),
-          ],
-        ));
+            activeColor: Colors.redAccent,
+          ),
+          BottomNavyBarItem(
+              icon: const Icon(Icons.location_city_rounded),
+              title: const Text('Location'),
+              activeColor: Colors.black),
+          BottomNavyBarItem(
+              icon: const Icon(Icons.source_rounded),
+              title: const Text('Source'),
+              activeColor: Colors.black),
+          BottomNavyBarItem(
+              icon: const Icon(Icons.settings),
+              title: const Text(
+                'Settings',
+              ),
+              activeColor: Colors.black),
+        ],
+      ),
+    );
   }
 }

@@ -1,6 +1,8 @@
 import 'dart:convert';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:newzshots/views/generic_view_articles.dart';
 
 class LocationPage extends StatefulWidget {
   const LocationPage({Key? key}) : super(key: key);
@@ -59,11 +61,22 @@ class _LocationPageState extends State<LocationPage> {
             ),
             itemCount: countries.length,
             itemBuilder: (BuildContext context, int index) {
-              return Card(
-                color: Colors.amber,
-                child: Center(
-                  child: Image.network(
-                      'https://flagcdn.com/48x36/${countries[index]}.png'),
+              return InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    CupertinoPageRoute(
+                      builder: (context) =>
+                          GenericViewPage(url: '/country/${countries[index]}'),
+                    ),
+                  );
+                },
+                child: Card(
+                  color: Colors.amber,
+                  child: Center(
+                    child: Image.network(
+                        'https://flagcdn.com/48x36/${countries[index]}.png'),
+                  ),
                 ),
               );
             }),

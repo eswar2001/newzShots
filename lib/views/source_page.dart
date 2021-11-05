@@ -1,6 +1,8 @@
 import 'dart:convert';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:newzshots/views/generic_view_articles.dart';
 
 class SourcePage extends StatefulWidget {
   const SourcePage({Key? key}) : super(key: key);
@@ -11,13 +13,13 @@ class SourcePage extends StatefulWidget {
 
 class _SourcePageState extends State<SourcePage> {
   bool isLoading = true;
-  List<dynamic> countries = [];
+  List<dynamic> source = [];
   getData() async {
     var response =
         await http.get(Uri.https('newzshots.herokuapp.com', '/sources'));
     if (response.statusCode == 200) {
       var jsonResponse = jsonDecode(response.body) as List<dynamic>;
-      countries.addAll(jsonResponse);
+      source.addAll(jsonResponse);
       if (mounted) {
         setState(() {
           isLoading = false;
@@ -57,13 +59,24 @@ class _SourcePageState extends State<SourcePage> {
               mainAxisSpacing: 10,
               crossAxisCount: 2,
             ),
-            itemCount: countries.length,
+            itemCount: source.length,
             itemBuilder: (BuildContext context, int index) {
-              return Card(
-                color: Colors.amber,
-                child: Center(
-                  child: Image.network(
-                      'https://newzshots.herokuapp.com/img/${countries[index]}'),
+              return InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    CupertinoPageRoute(
+                      builder: (context) =>
+                          GenericViewPage(url: '/source/${source[index]}'),
+                    ),
+                  );
+                },
+                child: Card(
+                  color: Colors.amber,
+                  child: Center(
+                    child: Image.network(
+                        'https://newzshots.herokuapp.com/img/${source[index]}'),
+                  ),
                 ),
               );
             }),

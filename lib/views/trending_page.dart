@@ -15,8 +15,8 @@ class _TrendingPageState extends State<TrendingPage> {
   bool isLoading = true;
   List<Article> articles = [];
   getData() async {
-    var response = await http
-        .get(Uri.https('newzshots.herokuapp.com', '/source/theverge.com'));
+    var response =
+        await http.get(Uri.https('newzshots.herokuapp.com', '/headlines'));
     if (response.statusCode == 200) {
       var jsonResponse = jsonDecode(response.body) as Map<String, dynamic>;
       var itemCount = jsonResponse['length'];
@@ -53,6 +53,7 @@ class _TrendingPageState extends State<TrendingPage> {
       );
     } else {
       return ListView(
+        addAutomaticKeepAlives: true,
         children: articles
             .map((e) => TrendingCard(
                   trending: e,
