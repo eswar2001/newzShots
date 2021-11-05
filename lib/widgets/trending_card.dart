@@ -20,6 +20,16 @@ class TrendingCard extends StatelessWidget {
                 )
               : Image.network(
                   trending.urlToImage,
+                  errorBuilder: (context, error, stackTrace) {
+                    return Container(
+                      color: Colors.amber,
+                      alignment: Alignment.center,
+                      child: const Text(
+                        'Whoops!',
+                        style: TextStyle(fontSize: 30),
+                      ),
+                    );
+                  },
                 ),
           ListTile(
             leading: Container(
@@ -33,7 +43,8 @@ class TrendingCard extends StatelessWidget {
                       ? const NetworkImage(
                           'https://brandlogos.net/wp-content/uploads/2020/03/YouTube-icon-SVG-512x512.png')
                       : NetworkImage(
-                          'https://newzshots.herokuapp.com/img/${uri.host.replaceAll('www.', '')}'),
+                          'https://newzshots.herokuapp.com/img/${uri.host.replaceAll('www.', '')}',
+                        ),
                 ),
               ),
             ),
