@@ -72,7 +72,6 @@ class _SourcePageState extends State<SourcePage> {
                 );
               },
               child: Card(
-                color: Colors.amber,
                 child: Center(
                   child: Image.network(
                       'https://newzshots.herokuapp.com/img/${source[index]}'),

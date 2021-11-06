@@ -72,7 +72,7 @@ class _LocationPageState extends State<LocationPage> {
                 );
               },
               child: Card(
-                color: Colors.amber,
+                // color: Colors.amber,
                 child: Center(
                   child: Image.network(
                       'https://flagcdn.com/48x36/${countries[index]}.png'),
