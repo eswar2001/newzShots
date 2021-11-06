@@ -53,33 +53,34 @@ class _LocationPageState extends State<LocationPage> {
         context: context,
         removeTop: true,
         child: GridView.builder(
-            padding: const EdgeInsets.all(20),
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisSpacing: 10,
-              mainAxisSpacing: 10,
-              crossAxisCount: 2,
-            ),
-            itemCount: countries.length,
-            itemBuilder: (BuildContext context, int index) {
-              return InkWell(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    CupertinoPageRoute(
-                      builder: (context) =>
-                          GenericViewPage(url: '/country/${countries[index]}'),
-                    ),
-                  );
-                },
-                child: Card(
-                  color: Colors.amber,
-                  child: Center(
-                    child: Image.network(
-                        'https://flagcdn.com/48x36/${countries[index]}.png'),
+          padding: const EdgeInsets.all(20),
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisSpacing: 10,
+            mainAxisSpacing: 10,
+            crossAxisCount: 2,
+          ),
+          itemCount: countries.length,
+          itemBuilder: (BuildContext context, int index) {
+            return InkWell(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  CupertinoPageRoute(
+                    builder: (context) =>
+                        GenericViewPage(url: '/country/${countries[index]}'),
                   ),
+                );
+              },
+              child: Card(
+                color: Colors.amber,
+                child: Center(
+                  child: Image.network(
+                      'https://flagcdn.com/48x36/${countries[index]}.png'),
                 ),
-              );
-            }),
+              ),
+            );
+          },
+        ),
       );
     }
   }

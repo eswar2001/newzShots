@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:newzshots/views/location_page.dart';
@@ -12,6 +14,7 @@ void main() {
 class MyApp extends StatelessWidget {
   MyApp({Key? key}) : super(key: key);
   GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -21,11 +24,6 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.deepOrange,
         brightness: Brightness.light,
-      ),
-      darkTheme: ThemeData(
-        primarySwatch: Colors.deepPurple,
-        accentColor: Colors.deepPurple,
-        brightness: Brightness.dark,
       ),
       home: const MyHome(),
     );
@@ -41,7 +39,7 @@ class MyHome extends StatefulWidget {
 
 class _MyHomeState extends State<MyHome> {
   int _currentIndex = 0;
-  PageController _pageController = PageController();
+  final PageController _pageController = PageController();
 
   @override
   void initState() {
@@ -76,12 +74,14 @@ class _MyHomeState extends State<MyHome> {
       bottomNavigationBar: BottomNavyBar(
         backgroundColor: Colors.white,
         selectedIndex: _currentIndex,
-        showElevation: true, // use this to remove appBar's elevation
-        onItemSelected: (index) => setState(() {
-          _currentIndex = index;
-          _pageController.animateToPage(index,
-              duration: const Duration(milliseconds: 300), curve: Curves.ease);
-        }),
+        onItemSelected: (index) => setState(
+          () {
+            _currentIndex = index;
+            _pageController.animateToPage(index,
+                duration: const Duration(milliseconds: 300),
+                curve: Curves.ease);
+          },
+        ),
         items: [
           BottomNavyBarItem(
             icon: const Icon(Icons.trending_up_rounded),
@@ -100,9 +100,9 @@ class _MyHomeState extends State<MyHome> {
               title: const Text('Source'),
               activeColor: Colors.black),
           BottomNavyBarItem(
-              icon: const Icon(Icons.description_rounded),
+              icon: const Icon(Icons.format_quote_rounded),
               title: const Text(
-                'About',
+                'Quote',
               ),
               activeColor: Colors.black),
         ],

@@ -24,13 +24,7 @@ class WebViewPageState extends State<WebViewPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(
-            bottom: Radius.circular(30),
-          ),
-        ),
-        elevation: 0.3,
-        toolbarHeight: 60,
+        elevation: 0,
         centerTitle: true,
         leading: InkWell(
           child: IconButton(

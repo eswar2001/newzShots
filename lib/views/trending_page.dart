@@ -15,22 +15,26 @@ class _TrendingPageState extends State<TrendingPage> {
   bool isLoading = true;
   List<Article> articles = [];
   getData() async {
-    var response =
-        await http.get(Uri.https('newzshots.herokuapp.com', '/headlines'));
-    if (response.statusCode == 200) {
-      var jsonResponse = jsonDecode(response.body) as Map<String, dynamic>;
-      var itemCount = jsonResponse['length'];
-      articles.addAll(jsonResponse['articles']
-          .map<Article>((i) => Article.fromJson(i))
-          .toList());
-      if (mounted) {
-        setState(() {
-          isLoading = false;
-        });
+    try {
+      var response =
+          await http.get(Uri.https('newzshots.herokuapp.com', '/headlines'));
+      if (response.statusCode == 200) {
+        var jsonResponse = jsonDecode(response.body) as Map<String, dynamic>;
+        var itemCount = jsonResponse['length'];
+        articles.addAll(jsonResponse['articles']
+            .map<Article>((i) => Article.fromJson(i))
+            .toList());
+        if (mounted) {
+          setState(() {
+            isLoading = false;
+          });
+        }
+        print('Number of articles about http: $itemCount.');
+      } else {
+        print('Request failed with status: ${response.statusCode}.');
       }
-      print('Number of articles about http: $itemCount.');
-    } else {
-      print('Request failed with status: ${response.statusCode}.');
+    } catch (e) {
+      print(e);
     }
   }
 

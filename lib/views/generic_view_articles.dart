@@ -18,13 +18,7 @@ class _GenericViewPageState extends State<GenericViewPage> {
     print(widget.url);
     return Scaffold(
       appBar: AppBar(
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(
-            bottom: Radius.circular(30),
-          ),
-        ),
-        elevation: 0.3,
-        toolbarHeight: 60,
+        elevation: 0,
         centerTitle: true,
         leading: InkWell(
           child: IconButton(

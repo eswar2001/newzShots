@@ -42,29 +42,50 @@ class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(
-            bottom: Radius.circular(30),
+      // appBar: AppBar(
+      //   centerTitle: true,
+      //   elevation: 0,
+      //   title: const Text(
+      //     'About',
+      //     style: TextStyle(
+      //       color: Colors.black,
+      //       fontSize: 20,
+      //       fontWeight: FontWeight.w600,
+      //     ),
+      //   ),
+      //   backgroundColor: Colors.white,
+      // ),
+      body: Container(
+        padding: const EdgeInsets.all(20.0),
+        color: Colors.white,
+        child: Align(
+          alignment: Alignment.center,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              Text(
+                content,
+                style: const TextStyle(
+                    fontFamily: 'Playfair Display',
+                    color: Colors.black,
+                    fontSize: 20.0),
+              ),
+              const Padding(
+                padding: EdgeInsets.all(10.0),
+              ),
+              Text(
+                author,
+                style: const TextStyle(
+                    fontFamily: 'Playfair Display',
+                    color: Colors.black,
+                    fontSize: 20.0),
+              ),
+              const Padding(
+                padding: EdgeInsets.all(30.0),
+              ),
+            ],
           ),
-        ),
-        elevation: 0.3,
-        toolbarHeight: 60,
-        centerTitle: true,
-        title: const Text(
-          'About',
-          style: TextStyle(
-            color: Colors.black,
-            fontSize: 20,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-        backgroundColor: Colors.white,
-      ),
-      body: Center(
-        child: ListTile(
-          title: Text(content),
-          subtitle: Text(author),
         ),
       ),
     );

@@ -28,7 +28,7 @@ class TrendingCard extends StatelessWidget {
                       color: Colors.amber,
                       alignment: Alignment.center,
                       child: const Text(
-                        'Whoops!',
+                        'No Image to load',
                         style: TextStyle(fontSize: 30),
                       ),
                     );
@@ -61,7 +61,7 @@ class TrendingCard extends StatelessWidget {
             padding: const EdgeInsets.all(16.0),
             child: Text(
               ' ${trending.description}',
-              style: TextStyle(color: Colors.black.withOpacity(0.6)),
+              style: TextStyle(color: Colors.black),
             ),
           ),
           ButtonBar(
@@ -79,17 +79,19 @@ class TrendingCard extends StatelessWidget {
                     context,
                     CupertinoPageRoute(
                       builder: (context) => WebViewPage(
-                          intUrl: trending.url, title: trending.sourceName),
+                        intUrl: trending.url,
+                        title: trending.sourceName,
+                      ),
                     ),
                   );
                 },
-                child: const Text('open'),
+                child: const Text('View'),
               ),
               TextButton(
                 onPressed: () {
                   Share.share(trending.url);
                 },
-                child: const Text('share'),
+                child: const Text('Share'),
               ),
             ],
           ),
