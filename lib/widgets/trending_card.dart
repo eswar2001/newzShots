@@ -1,5 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:newzshots/model/article.dart';
+import 'package:newzshots/views/webview_page.dart';
 import 'package:share/share.dart';
 
 class TrendingCard extends StatelessWidget {
@@ -65,13 +67,23 @@ class TrendingCard extends StatelessWidget {
           ButtonBar(
             alignment: MainAxisAlignment.start,
             children: [
-              TextButton(
-                onPressed: () {},
-                child: const Text('open'),
+              Text(
+                'Published :${trending.publishedAt}',
+                style: TextStyle(
+                  color: Colors.black.withOpacity(0.6),
+                ),
               ),
               TextButton(
-                onPressed: () {},
-                child: const Text('goto'),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    CupertinoPageRoute(
+                      builder: (context) => WebViewPage(
+                          intUrl: trending.url, title: trending.sourceName),
+                    ),
+                  );
+                },
+                child: const Text('open'),
               ),
               TextButton(
                 onPressed: () {

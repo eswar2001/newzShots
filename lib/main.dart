@@ -1,6 +1,7 @@
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:newzshots/views/location_page.dart';
+import 'package:newzshots/views/settings_page.dart';
 import 'package:newzshots/views/source_page.dart';
 import 'package:newzshots/views/trending_page.dart';
 
@@ -17,6 +18,15 @@ class MyApp extends StatelessWidget {
       title: 'NewzShots',
       navigatorKey: navigatorKey,
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primarySwatch: Colors.deepOrange,
+        brightness: Brightness.light,
+      ),
+      darkTheme: ThemeData(
+        primarySwatch: Colors.deepPurple,
+        accentColor: Colors.deepPurple,
+        brightness: Brightness.dark,
+      ),
       home: const MyHome(),
     );
   }
@@ -54,13 +64,11 @@ class _MyHomeState extends State<MyHome> {
             onPageChanged: (index) {
               setState(() => _currentIndex = index);
             },
-            children: <Widget>[
-              const TrendingPage(),
-              const LocationPage(),
-              const SourcePage(),
-              Container(
-                color: Colors.blue,
-              ),
+            children: const <Widget>[
+              TrendingPage(),
+              LocationPage(),
+              SourcePage(),
+              SettingsPage()
             ],
           ),
         ),
@@ -78,23 +86,23 @@ class _MyHomeState extends State<MyHome> {
           BottomNavyBarItem(
             icon: const Icon(Icons.trending_up_rounded),
             title: const Text(
-              'Article',
+              'Trending',
               style: TextStyle(color: Colors.black),
             ),
             activeColor: Colors.redAccent,
           ),
           BottomNavyBarItem(
-              icon: const Icon(Icons.location_city_rounded),
+              icon: const Icon(Icons.location_on_rounded),
               title: const Text('Location'),
               activeColor: Colors.black),
           BottomNavyBarItem(
-              icon: const Icon(Icons.source_rounded),
+              icon: const Icon(Icons.tv_rounded),
               title: const Text('Source'),
               activeColor: Colors.black),
           BottomNavyBarItem(
-              icon: const Icon(Icons.settings),
+              icon: const Icon(Icons.description_rounded),
               title: const Text(
-                'Settings',
+                'About',
               ),
               activeColor: Colors.black),
         ],
