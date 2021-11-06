@@ -13,6 +13,7 @@ class TrendingPage extends StatefulWidget {
 
 class _TrendingPageState extends State<TrendingPage> {
   bool isLoading = true;
+  ScrollController _scrollController = new ScrollController();
   List<Article> articles = [];
   getData() async {
     try {
@@ -57,6 +58,7 @@ class _TrendingPageState extends State<TrendingPage> {
       );
     } else {
       return ListView(
+        controller: _scrollController,
         addAutomaticKeepAlives: true,
         children: articles
             .map((e) => TrendingCard(

@@ -69,13 +69,13 @@ class _SettingsPageState extends State<SettingsPage> {
                 style: const TextStyle(
                     fontFamily: 'Playfair Display',
                     color: Colors.black,
-                    fontSize: 20.0),
+                    fontSize: 30.0),
               ),
               const Padding(
                 padding: EdgeInsets.all(10.0),
               ),
               Text(
-                author,
+                '~ $author',
                 style: const TextStyle(
                     fontFamily: 'Playfair Display',
                     color: Colors.black,
