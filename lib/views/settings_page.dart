@@ -14,6 +14,8 @@ class _SettingsPageState extends State<SettingsPage> {
   String content = "";
   String author = "";
   getData() async {
+    content = "";
+    author = "";
     var response = await http.get(Uri.https('api.quotable.io', '/random'));
     if (response.statusCode == 200) {
       var jsonResponse = jsonDecode(response.body) as Map<String, dynamic>;

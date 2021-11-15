@@ -13,10 +13,12 @@ class TrendingPage extends StatefulWidget {
 
 class _TrendingPageState extends State<TrendingPage> {
   bool isLoading = true;
+  bool isSearching = false;
   ScrollController _scrollController = new ScrollController();
   List<Article> articles = [];
   getData() async {
     try {
+      articles = [];
       var response =
           await http.get(Uri.https('newzshots.herokuapp.com', '/headlines'));
       if (response.statusCode == 200) {
@@ -57,14 +59,26 @@ class _TrendingPageState extends State<TrendingPage> {
         child: CircularProgressIndicator(),
       );
     } else {
-      return ListView(
-        controller: _scrollController,
-        addAutomaticKeepAlives: true,
-        children: articles
-            .map((e) => TrendingCard(
-                  trending: e,
-                ))
-            .toList(),
+      return RefreshIndicator(
+        onRefresh: () async {
+          setState(() {
+            isLoading = true;
+          });
+          getData();
+          await Future.delayed(const Duration(seconds: 3));
+          setState(() {
+            isLoading = false;
+          });
+        },
+        child: ListView(
+          controller: _scrollController,
+          addAutomaticKeepAlives: true,
+          children: articles
+              .map((e) => TrendingCard(
+                    trending: e,
+                  ))
+              .toList(),
+        ),
       );
     }
   }

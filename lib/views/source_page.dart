@@ -15,6 +15,7 @@ class _SourcePageState extends State<SourcePage> {
   bool isLoading = true;
   List<dynamic> source = [];
   getData() async {
+    source = [];
     var response =
         await http.get(Uri.https('newzshots.herokuapp.com', '/sources'));
     if (response.statusCode == 200) {
@@ -49,45 +50,57 @@ class _SourcePageState extends State<SourcePage> {
         child: CircularProgressIndicator(),
       );
     } else {
-      return MediaQuery.removePadding(
-        context: context,
-        removeTop: true,
-        child: GridView.builder(
-          padding: const EdgeInsets.all(20),
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisSpacing: 10,
-            mainAxisSpacing: 10,
-            crossAxisCount: 2,
-          ),
-          itemCount: source.length,
-          itemBuilder: (BuildContext context, int index) {
-            return InkWell(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  CupertinoPageRoute(
-                    builder: (context) =>
-                        GenericViewPage(url: '/source/${source[index]}'),
-                  ),
-                );
-              },
-              child: Card(
-                child: Center(
-                  child: Image.network(
-                    'https://newzshots.herokuapp.com/img/${source[index]}',
-                    errorBuilder: (c, o, s) {
-                      return const Icon(
-                        Icons.error,
-                        color: Colors.red,
-                      );
-                    },
-                    key: Key(
-                        'https://newzshots.herokuapp.com/img/${source[index]}'),
+      return RefreshIndicator(
+        onRefresh: () async {
+          setState(() {
+            isLoading = true;
+          });
+          getData();
+          await Future.delayed(const Duration(seconds: 3));
+          setState(() {
+            isLoading = false;
+          });
+        },
+        child: MediaQuery.removePadding(
+          context: context,
+          removeTop: true,
+          child: GridView.builder(
+            padding: const EdgeInsets.all(20),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisSpacing: 10,
+              mainAxisSpacing: 10,
+              crossAxisCount: 2,
+            ),
+            itemCount: source.length,
+            itemBuilder: (BuildContext context, int index) {
+              return InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    CupertinoPageRoute(
+                      builder: (context) =>
+                          GenericViewPage(url: '/source/${source[index]}'),
+                    ),
+                  );
+                },
+                child: Card(
+                  child: Center(
+                    child: Image.network(
+                      'https://newzshots.herokuapp.com/img/${source[index]}',
+                      errorBuilder: (c, o, s) {
+                        return const Icon(
+                          Icons.error,
+                          color: Colors.red,
+                        );
+                      },
+                      key: Key(
+                          'https://newzshots.herokuapp.com/img/${source[index]}'),
+                    ),
                   ),
                 ),
-              ),
-            );
-          },
+              );
+            },
+          ),
         ),
       );
     }

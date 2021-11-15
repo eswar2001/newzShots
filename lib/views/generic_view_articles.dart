@@ -55,6 +55,7 @@ class _GenericViewState extends State<GenericView> {
   bool isLoading = true;
   List<Article> articles = [];
   getData() async {
+    articles = [];
     var response = await http.get(
       Uri.https('newzshots.herokuapp.com', widget.url),
     );
@@ -93,13 +94,25 @@ class _GenericViewState extends State<GenericView> {
         child: CircularProgressIndicator(),
       );
     } else {
-      return ListView(
-        addAutomaticKeepAlives: true,
-        children: articles
-            .map((e) => TrendingCard(
-                  trending: e,
-                ))
-            .toList(),
+      return RefreshIndicator(
+        onRefresh: () async {
+          setState(() {
+            isLoading = true;
+          });
+          getData();
+          await Future.delayed(const Duration(seconds: 3));
+          setState(() {
+            isLoading = false;
+          });
+        },
+        child: ListView(
+          addAutomaticKeepAlives: true,
+          children: articles
+              .map((e) => TrendingCard(
+                    trending: e,
+                  ))
+              .toList(),
+        ),
       );
     }
   }

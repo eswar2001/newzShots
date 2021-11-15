@@ -62,6 +62,7 @@ class _IndividualCategortPageState extends State<IndividualCategortPage> {
   final ScrollController _scrollController = ScrollController();
   List<CArticle> articles = [];
   getData() async {
+    articles = [];
     try {
       var response =
           await http.get(Uri.https('newzshots.herokuapp.com', widget.url));
@@ -104,14 +105,26 @@ class _IndividualCategortPageState extends State<IndividualCategortPage> {
         child: CircularProgressIndicator(),
       );
     } else {
-      return ListView(
-        controller: _scrollController,
-        addAutomaticKeepAlives: true,
-        children: articles
-            .map((e) => CTrendingCard(
-                  trending: e,
-                ))
-            .toList(),
+      return RefreshIndicator(
+        onRefresh: () async {
+          setState(() {
+            isLoading = true;
+          });
+          getData();
+          await Future.delayed(const Duration(seconds: 3));
+          setState(() {
+            isLoading = false;
+          });
+        },
+        child: ListView(
+          controller: _scrollController,
+          addAutomaticKeepAlives: true,
+          children: articles
+              .map((e) => CTrendingCard(
+                    trending: e,
+                  ))
+              .toList(),
+        ),
       );
     }
   }
