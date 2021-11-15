@@ -29,7 +29,7 @@ class _SettingsPageState extends State<SettingsPage> {
         });
       }
     } else {
-      print('Request failed with status: ${response.statusCode}.');
+      //print('Request failed with status: ${response.statusCode}.');
     }
   }
 

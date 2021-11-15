@@ -28,10 +28,10 @@ class _CategoriesPageState extends State<CategoriesPage> {
           });
         }
       } else {
-        print('error');
+        //print('error');
       }
     } catch (e) {
-      print(e);
+      //print(e);
     }
   }
 
@@ -108,7 +108,7 @@ class _IndividualViewCategortPageState
     extends State<IndividualViewCategortPage> {
   @override
   Widget build(BuildContext context) {
-    print(widget.url);
+    //print(widget.url);
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -157,7 +157,7 @@ class _IndividualCategortPageState extends State<IndividualCategortPage> {
           await http.get(Uri.https('newzshots.herokuapp.com', widget.url));
       if (response.statusCode == 200) {
         var jsonResponse = jsonDecode(response.body) as Map<String, dynamic>;
-        print(jsonResponse);
+
         var itemCount = jsonResponse['count-articles'];
         articles.addAll(jsonResponse['data']
             .map<CArticle>((i) => CArticle.fromJson(i))
@@ -167,12 +167,12 @@ class _IndividualCategortPageState extends State<IndividualCategortPage> {
             isLoading = false;
           });
         }
-        print('Number of articles about http: $itemCount.');
+        //print('Number of articles about http: $itemCount.');
       } else {
-        print('Request failed with status: ${response.statusCode}.');
+        //print('Request failed with status: ${response.statusCode}.');
       }
     } catch (e) {
-      print(e);
+      //print(e);
     }
   }
 

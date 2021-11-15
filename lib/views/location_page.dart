@@ -25,9 +25,9 @@ class _LocationPageState extends State<LocationPage> {
           isLoading = false;
         });
       }
-      print('Number of articles about http: ${jsonResponse.length}.');
+      //print('Number of articles about http: ${jsonResponse.length}.');
     } else {
-      print('Request failed with status: ${response.statusCode}.');
+      //print('Request failed with status: ${response.statusCode}.');
     }
   }
 

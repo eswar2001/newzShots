@@ -15,7 +15,7 @@ class GenericViewPage extends StatefulWidget {
 class _GenericViewPageState extends State<GenericViewPage> {
   @override
   Widget build(BuildContext context) {
-    print(widget.url);
+    //print(widget.url);
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -72,9 +72,9 @@ class _GenericViewState extends State<GenericView> {
           isLoading = false;
         });
       }
-      print('Number of articles about http: $itemCount.');
+      //print('Number of articles about http: $itemCount.');
     } else {
-      print('Request failed with status: ${response.statusCode}.');
+      //print('Request failed with status: ${response.statusCode}.');
     }
   }
 

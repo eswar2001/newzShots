@@ -30,12 +30,12 @@ class _TrendingPageState extends State<TrendingPage> {
             isLoading = false;
           });
         }
-        print('Number of articles about http: $itemCount.');
+        //print('Number of articles about http: $itemCount.');
       } else {
-        print('Request failed with status: ${response.statusCode}.');
+        //print('Request failed with status: ${response.statusCode}.');
       }
     } catch (e) {
-      print(e);
+      //print(e);
     }
   }
 

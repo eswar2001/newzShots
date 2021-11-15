@@ -12,7 +12,7 @@ class CTrendingCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final uri = Uri.parse(trending.url);
-    print(uri.host);
+    //print(uri.host);
     return Card(
       clipBehavior: Clip.antiAlias,
       child: Column(
