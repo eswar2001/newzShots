@@ -12,7 +12,6 @@ class TrendingCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final uri = Uri.parse(trending.url);
-    uri.host; // www.wikipedia.org
     return Card(
       clipBehavior: Clip.antiAlias,
       child: Column(

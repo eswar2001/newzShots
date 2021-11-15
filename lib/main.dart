@@ -1,16 +1,17 @@
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:newzshots/views/category_page.dart';
 import 'package:newzshots/views/location_page.dart';
 import 'package:newzshots/views/settings_page.dart';
 import 'package:newzshots/views/source_page.dart';
 import 'package:newzshots/views/trending_page.dart';
+import 'package:newzshots/views/webview_page.dart';
 
 void main() {
   runApp(MyApp());
 }
 
-// ignore: must_be_immutable
 class MyApp extends StatelessWidget {
   MyApp({Key? key}) : super(key: key);
   GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
@@ -22,8 +23,9 @@ class MyApp extends StatelessWidget {
       navigatorKey: navigatorKey,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.deepOrange,
+        primarySwatch: Colors.orange,
         brightness: Brightness.light,
+        visualDensity: VisualDensity.compact,
       ),
       home: const MyHome(),
     );
@@ -52,9 +54,53 @@ class _MyHomeState extends State<MyHome> {
     super.dispose();
   }
 
+  List<String> titles = [
+    'Trending',
+    'Location',
+    'Source',
+    'Categories',
+    'Quote'
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.lightBlue[50],
+      appBar: AppBar(
+        title: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            const Text('NewzShots - '),
+            Text(
+              titles[_currentIndex],
+              style: const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+                fontStyle: FontStyle.italic,
+              ),
+            ),
+          ],
+        ),
+        elevation: 0,
+        actions: [
+          InkWell(
+            child: IconButton(
+              icon: const Icon(Icons.star),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  CupertinoPageRoute(
+                    builder: (context) => const WebViewPage(
+                      intUrl: 'https://github.com/eswar2001/newzShots',
+                      title: 'Github',
+                    ),
+                  ),
+                );
+              },
+            ),
+          )
+        ],
+      ),
       body: SafeArea(
         child: SizedBox.expand(
           child: PageView(
@@ -73,7 +119,7 @@ class _MyHomeState extends State<MyHome> {
         ),
       ),
       bottomNavigationBar: BottomNavyBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.deepPurple[500],
         selectedIndex: _currentIndex,
         onItemSelected: (index) => setState(
           () {
@@ -90,28 +136,51 @@ class _MyHomeState extends State<MyHome> {
             icon: const Icon(Icons.trending_up_rounded),
             title: const Text(
               'Trending',
-              style: TextStyle(color: Colors.black),
+              style: TextStyle(color: Colors.white),
             ),
-            activeColor: Colors.redAccent,
+            activeColor: Colors.red,
           ),
           BottomNavyBarItem(
-              icon: const Icon(Icons.location_on_rounded),
-              title: const Text('Location'),
-              activeColor: Colors.black),
+            icon: const Icon(
+              Icons.location_on_rounded,
+              color: Colors.white,
+            ),
+            title: const Text(
+              'Location',
+              style: TextStyle(color: Colors.white),
+            ),
+            activeColor: Colors.white,
+          ),
           BottomNavyBarItem(
-              icon: const Icon(Icons.tv_rounded),
-              title: const Text('Source'),
-              activeColor: Colors.black),
+              icon: const Icon(
+                Icons.tv_rounded,
+                color: Colors.white,
+              ),
+              title: const Text(
+                'Source',
+                style: TextStyle(color: Colors.white),
+              ),
+              activeColor: Colors.white),
           BottomNavyBarItem(
-              icon: const Icon(Icons.category_rounded),
-              title: const Text('Category'),
-              activeColor: Colors.black),
+              icon: const Icon(
+                Icons.category_rounded,
+                color: Colors.white,
+              ),
+              title: const Text(
+                'Category',
+                style: TextStyle(color: Colors.white),
+              ),
+              activeColor: Colors.white),
           BottomNavyBarItem(
-              icon: const Icon(Icons.format_quote_rounded),
+              icon: const Icon(
+                Icons.format_quote_rounded,
+                color: Colors.white,
+              ),
               title: const Text(
                 'Quote',
+                style: TextStyle(color: Colors.white),
               ),
-              activeColor: Colors.black),
+              activeColor: Colors.white),
         ],
       ),
     );

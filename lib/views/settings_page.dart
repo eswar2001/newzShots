@@ -1,8 +1,5 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:settings_ui/settings_ui.dart';
-
 import 'package:http/http.dart' as http;
 
 class SettingsPage extends StatefulWidget {
@@ -41,51 +38,40 @@ class _SettingsPageState extends State<SettingsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      // appBar: AppBar(
-      //   centerTitle: true,
-      //   elevation: 0,
-      //   title: const Text(
-      //     'About',
-      //     style: TextStyle(
-      //       color: Colors.black,
-      //       fontSize: 20,
-      //       fontWeight: FontWeight.w600,
-      //     ),
-      //   ),
-      //   backgroundColor: Colors.white,
-      // ),
-      body: Container(
-        padding: const EdgeInsets.all(20.0),
-        color: Colors.white,
-        child: Align(
-          alignment: Alignment.center,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              Text(
-                content,
-                style: const TextStyle(
-                    fontFamily: 'Playfair Display',
-                    color: Colors.black,
-                    fontSize: 30.0),
-              ),
-              const Padding(
-                padding: EdgeInsets.all(10.0),
-              ),
-              Text(
-                '~ $author',
-                style: const TextStyle(
-                    fontFamily: 'Playfair Display',
-                    color: Colors.black,
-                    fontSize: 20.0),
-              ),
-              const Padding(
-                padding: EdgeInsets.all(30.0),
-              ),
-            ],
-          ),
+    if (isLoading) {
+      return const Center(
+        child: CircularProgressIndicator(),
+      );
+    }
+    return Container(
+      padding: const EdgeInsets.all(20.0),
+      child: Align(
+        alignment: Alignment.center,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            Text(
+              content,
+              style: const TextStyle(
+                  fontFamily: 'Playfair Display',
+                  color: Colors.black,
+                  fontSize: 30.0),
+            ),
+            const Padding(
+              padding: EdgeInsets.all(10.0),
+            ),
+            Text(
+              '~ $author',
+              style: const TextStyle(
+                  fontFamily: 'Playfair Display',
+                  color: Colors.black,
+                  fontSize: 20.0),
+            ),
+            const Padding(
+              padding: EdgeInsets.all(30.0),
+            ),
+          ],
         ),
       ),
     );

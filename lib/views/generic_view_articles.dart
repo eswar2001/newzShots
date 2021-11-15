@@ -24,7 +24,6 @@ class _GenericViewPageState extends State<GenericViewPage> {
           child: IconButton(
             icon: const Icon(
               Icons.arrow_back_ios_rounded,
-              color: Colors.black,
             ),
             onPressed: () {
               Navigator.of(context).pop();
@@ -34,12 +33,10 @@ class _GenericViewPageState extends State<GenericViewPage> {
         title: const Text(
           'Results',
           style: TextStyle(
-            color: Colors.black,
             fontSize: 20,
             fontWeight: FontWeight.w600,
           ),
         ),
-        backgroundColor: Colors.white,
       ),
       body: GenericView(url: widget.url),
     );

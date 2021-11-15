@@ -30,7 +30,6 @@ class WebViewPageState extends State<WebViewPage> {
           child: IconButton(
             icon: const Icon(
               Icons.arrow_back_ios_rounded,
-              color: Colors.black,
             ),
             onPressed: () {
               Navigator.of(context).pop();
@@ -40,12 +39,10 @@ class WebViewPageState extends State<WebViewPage> {
         title: Text(
           widget.title,
           style: const TextStyle(
-            color: Colors.black,
             fontSize: 20,
             fontWeight: FontWeight.w600,
           ),
         ),
-        backgroundColor: Colors.white,
       ),
       body: SafeArea(
         child: WebView(
