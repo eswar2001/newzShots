@@ -77,7 +77,13 @@ class _CategoriesPageState extends State<CategoriesPage> {
               },
               child: Card(
                 child: Center(
-                  child: Text(category[index]),
+                  child: Text(
+                    category[index].toString().toUpperCase(),
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ),
               ),
             );
@@ -118,9 +124,9 @@ class _IndividualViewCategortPageState
             },
           ),
         ),
-        title: const Text(
-          'Results',
-          style: TextStyle(
+        title: Text(
+          widget.url.replaceAll('/category/', '').toUpperCase(),
+          style: const TextStyle(
             color: Colors.black,
             fontSize: 20,
             fontWeight: FontWeight.w600,
@@ -143,7 +149,7 @@ class IndividualCategortPage extends StatefulWidget {
 
 class _IndividualCategortPageState extends State<IndividualCategortPage> {
   bool isLoading = true;
-  ScrollController _scrollController = new ScrollController();
+  final ScrollController _scrollController = ScrollController();
   List<CArticle> articles = [];
   getData() async {
     try {

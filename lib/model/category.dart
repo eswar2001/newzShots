@@ -17,7 +17,7 @@ class CArticle {
       required this.sourceName});
   CArticle.fromJson(Map<String, dynamic> json)
       : author = json['author'] ?? '',
-        description = json['description'] ?? '',
+        description = json['decription'] ?? '',
         publishedAt = json['time'] ?? '',
         sourceName = Uri.parse(json['read-more']).host.replaceAll('wwww.', ''),
         title = json['title'] ?? '',
