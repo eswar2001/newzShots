@@ -53,6 +53,7 @@ class WebViewPageState extends State<WebViewPage> {
           allowsInlineMediaPlayback: true,
           gestureNavigationEnabled: true,
           zoomEnabled: true,
+          javascriptMode: JavascriptMode.unrestricted,
         ),
       ),
     );

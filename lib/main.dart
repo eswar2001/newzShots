@@ -10,7 +10,7 @@ void main() {
   runApp(MyApp());
 }
 
-@override
+// ignore: must_be_immutable
 class MyApp extends StatelessWidget {
   MyApp({Key? key}) : super(key: key);
   GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
@@ -78,9 +78,11 @@ class _MyHomeState extends State<MyHome> {
         onItemSelected: (index) => setState(
           () {
             _currentIndex = index;
-            _pageController.animateToPage(index,
-                duration: const Duration(milliseconds: 300),
-                curve: Curves.ease);
+            _pageController.animateToPage(
+              index,
+              duration: const Duration(milliseconds: 300),
+              curve: Curves.ease,
+            );
           },
         ),
         items: [
