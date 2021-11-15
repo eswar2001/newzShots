@@ -1,13 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:newzshots/model/article.dart';
+import 'package:newzshots/model/category.dart';
 import 'package:newzshots/views/webview_page.dart';
 import 'package:share/share.dart';
 
-class TrendingCard extends StatelessWidget {
-  final Article trending;
-  const TrendingCard({Key? key, required this.trending}) : super(key: key);
+class CTrendingCard extends StatelessWidget {
+  final CArticle trending;
+  const CTrendingCard({Key? key, required this.trending}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +31,7 @@ class TrendingCard extends StatelessWidget {
                       image: DecorationImage(
                         image: imageProvider,
                         fit: BoxFit.contain,
+                        onError: (object, stackTrace) {},
                       ),
                     ),
                   ),
@@ -57,8 +58,7 @@ class TrendingCard extends StatelessWidget {
                   fit: BoxFit.fill,
                   image: trending.sourceName == "YouTube"
                       ? const NetworkImage(
-                          'https://brandlogos.net/wp-content/uploads/2020/03/YouTube-icon-SVG-512x512.png',
-                        )
+                          'https://brandlogos.net/wp-content/uploads/2020/03/YouTube-icon-SVG-512x512.png')
                       : NetworkImage(
                           'https://newzshots.herokuapp.com/img/${uri.host.replaceAll('www.', '')}',
                         ),

@@ -21,12 +21,12 @@ class Article {
   Article.fromJson(Map<String, dynamic> json)
       : sourceName = json['source']['name'].replaceAll(" ", ''),
         title = json['title'],
-        author = json['author'] == null ? '' : json['author'],
-        description = json['description'] == null ? '' : json['description'],
-        publishedAt = json['publishedAt'] == null ? '' : json['publishedAt'],
+        author = json['author'] ?? '',
+        description = json['description'] ?? '',
+        publishedAt = json['publishedAt'] ?? '',
         url = json['url'],
-        content = json['content'] == null ? '' : json['content'],
-        urlToImage = json['urlToImage'] == null ? '' : json['urlToImage'];
+        content = json['content'] ?? '',
+        urlToImage = json['urlToImage'] ?? '';
 
   Map<String, dynamic> toJson() => {
         'sourceName': sourceName.replaceAll(" ", ''),

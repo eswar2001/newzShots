@@ -75,7 +75,15 @@ class _LocationPageState extends State<LocationPage> {
                 // color: Colors.amber,
                 child: Center(
                   child: Image.network(
-                      'https://flagcdn.com/48x36/${countries[index]}.png'),
+                      'https://flagcdn.com/48x36/${countries[index]}.png',
+                      errorBuilder: (c, o, s) {
+                    return const Icon(
+                      Icons.error,
+                      color: Colors.red,
+                    );
+                  },
+                      key: Key(
+                          'https://newzshots.herokuapp.com/img/${countries[index]}')),
                 ),
               ),
             );

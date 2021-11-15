@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:newzshots/views/category_page.dart';
 import 'package:newzshots/views/location_page.dart';
 import 'package:newzshots/views/settings_page.dart';
 import 'package:newzshots/views/source_page.dart';
@@ -66,6 +67,7 @@ class _MyHomeState extends State<MyHome> {
               TrendingPage(),
               LocationPage(),
               SourcePage(),
+              CategoriesPage(),
               SettingsPage()
             ],
           ),
@@ -98,6 +100,10 @@ class _MyHomeState extends State<MyHome> {
           BottomNavyBarItem(
               icon: const Icon(Icons.tv_rounded),
               title: const Text('Source'),
+              activeColor: Colors.black),
+          BottomNavyBarItem(
+              icon: const Icon(Icons.category_rounded),
+              title: const Text('Category'),
               activeColor: Colors.black),
           BottomNavyBarItem(
               icon: const Icon(Icons.format_quote_rounded),

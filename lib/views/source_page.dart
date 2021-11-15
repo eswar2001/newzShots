@@ -74,7 +74,16 @@ class _SourcePageState extends State<SourcePage> {
               child: Card(
                 child: Center(
                   child: Image.network(
-                      'https://newzshots.herokuapp.com/img/${source[index]}'),
+                    'https://newzshots.herokuapp.com/img/${source[index]}',
+                    errorBuilder: (c, o, s) {
+                      return const Icon(
+                        Icons.error,
+                        color: Colors.red,
+                      );
+                    },
+                    key: Key(
+                        'https://newzshots.herokuapp.com/img/${source[index]}'),
+                  ),
                 ),
               ),
             );
