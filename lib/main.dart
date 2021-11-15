@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:newzshots/views/category_page.dart';
@@ -12,6 +10,7 @@ void main() {
   runApp(MyApp());
 }
 
+@override
 class MyApp extends StatelessWidget {
   MyApp({Key? key}) : super(key: key);
   GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
