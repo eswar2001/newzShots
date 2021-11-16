@@ -14,7 +14,7 @@ class TrendingPage extends StatefulWidget {
 class _TrendingPageState extends State<TrendingPage> {
   bool isLoading = true;
   bool isSearching = false;
-  ScrollController _scrollController = new ScrollController();
+  final ScrollController _scrollController = ScrollController();
   List<Article> articles = [];
   getData() async {
     try {

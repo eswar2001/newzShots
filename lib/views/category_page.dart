@@ -75,12 +75,12 @@ class _CategoriesPageState extends State<CategoriesPage> {
                 );
               },
               child: Card(
+                elevation: 0,
                 child: Center(
                   child: Text(
                     category[index].toString().toUpperCase(),
                     style: const TextStyle(
                       fontSize: 18,
-                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),

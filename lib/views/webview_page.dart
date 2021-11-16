@@ -24,6 +24,7 @@ class WebViewPageState extends State<WebViewPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.deepOrange,
         elevation: 0,
         centerTitle: true,
         leading: InkWell(

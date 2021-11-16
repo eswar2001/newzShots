@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
       navigatorKey: navigatorKey,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.orange,
+        primarySwatch: Colors.deepOrange,
         brightness: Brightness.light,
         visualDensity: VisualDensity.compact,
       ),
@@ -64,20 +64,23 @@ class _MyHomeState extends State<MyHome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.lightBlue[50],
       appBar: AppBar(
+        // backgroundColor: const Color(0xaaffffff),
         title: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            const Text('NewzShots - '),
+            const Text(
+              'NewzShots - ',
+              style: TextStyle(color: Colors.black),
+            ),
             Text(
               titles[_currentIndex],
               style: const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
-                fontStyle: FontStyle.italic,
-              ),
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                  fontStyle: FontStyle.italic,
+                  color: Colors.black),
             ),
           ],
         ),
@@ -85,7 +88,10 @@ class _MyHomeState extends State<MyHome> {
         actions: [
           InkWell(
             child: IconButton(
-              icon: const Icon(Icons.star),
+              icon: const Icon(
+                Icons.star,
+                color: Colors.black,
+              ),
               onPressed: () {
                 Navigator.push(
                   context,
@@ -119,7 +125,7 @@ class _MyHomeState extends State<MyHome> {
         ),
       ),
       bottomNavigationBar: BottomNavyBar(
-        backgroundColor: Colors.deepPurple[500],
+        backgroundColor: Colors.white,
         selectedIndex: _currentIndex,
         onItemSelected: (index) => setState(
           () {
@@ -136,51 +142,51 @@ class _MyHomeState extends State<MyHome> {
             icon: const Icon(Icons.trending_up_rounded),
             title: const Text(
               'Trending',
-              style: TextStyle(color: Colors.white),
+              style: TextStyle(color: Colors.red),
             ),
             activeColor: Colors.red,
           ),
           BottomNavyBarItem(
             icon: const Icon(
               Icons.location_on_rounded,
-              color: Colors.white,
+              color: Colors.black,
             ),
             title: const Text(
               'Location',
-              style: TextStyle(color: Colors.white),
+              style: TextStyle(color: Colors.black),
             ),
-            activeColor: Colors.white,
+            activeColor: Colors.black,
           ),
           BottomNavyBarItem(
               icon: const Icon(
                 Icons.tv_rounded,
-                color: Colors.white,
+                color: Colors.black,
               ),
               title: const Text(
                 'Source',
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(color: Colors.black),
               ),
-              activeColor: Colors.white),
+              activeColor: Colors.black),
           BottomNavyBarItem(
               icon: const Icon(
                 Icons.category_rounded,
-                color: Colors.white,
+                color: Colors.black,
               ),
               title: const Text(
                 'Category',
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(color: Colors.black),
               ),
-              activeColor: Colors.white),
+              activeColor: Colors.black),
           BottomNavyBarItem(
               icon: const Icon(
                 Icons.format_quote_rounded,
-                color: Colors.white,
+                color: Colors.black,
               ),
               title: const Text(
                 'Quote',
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(color: Colors.black),
               ),
-              activeColor: Colors.white),
+              activeColor: Colors.black),
         ],
       ),
     );

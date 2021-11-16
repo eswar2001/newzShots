@@ -20,6 +20,7 @@ class _GenericViewPageState extends State<GenericViewPage> {
       appBar: AppBar(
         elevation: 0,
         centerTitle: true,
+        backgroundColor: Colors.deepOrange,
         leading: InkWell(
           child: IconButton(
             icon: const Icon(

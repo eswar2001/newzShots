@@ -72,6 +72,7 @@ class _LocationPageState extends State<LocationPage> {
                 );
               },
               child: Card(
+                elevation: 0,
                 // color: Colors.amber,
                 child: Center(
                   child: Image.network(

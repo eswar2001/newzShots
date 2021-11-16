@@ -15,18 +15,19 @@ class CTrendingCard extends StatelessWidget {
     //print(uri.host);
     return Card(
       clipBehavior: Clip.antiAlias,
+      elevation: 0,
       child: Column(
         children: [
           trending.urlToImage.isEmpty
               ? Image.asset(
                   'images/logo.png',
-                  height: 300,
+                  height: MediaQuery.of(context).size.height / 3.5,
                 )
               : CachedNetworkImage(
                   imageUrl: trending.urlToImage,
                   imageBuilder: (context, imageProvider) => Container(
                     width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.height / 3,
+                    height: MediaQuery.of(context).size.height / 3.5,
                     decoration: BoxDecoration(
                       image: DecorationImage(
                         image: imageProvider,
@@ -106,8 +107,10 @@ class CTrendingCard extends StatelessWidget {
             ),
           ),
           Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              TextButton(
+              ElevatedButton(
                 onPressed: () {
                   Navigator.push(
                     context,
@@ -121,14 +124,14 @@ class CTrendingCard extends StatelessWidget {
                 },
                 child: const Text('View'),
               ),
-              TextButton(
+              ElevatedButton(
                 onPressed: () {
                   Share.share(trending.url);
                 },
                 child: const Text('Share'),
               ),
               Text(
-                'Published :${trending.publishedAt}',
+                'Published :${trending.publishedAt.substring(0, 10)}',
                 style: TextStyle(
                   color: Colors.black.withOpacity(0.6),
                 ),

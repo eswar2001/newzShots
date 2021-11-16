@@ -14,18 +14,19 @@ class TrendingCard extends StatelessWidget {
     final uri = Uri.parse(trending.url);
     return Card(
       clipBehavior: Clip.antiAlias,
+      elevation: 0,
       child: Column(
         children: [
           trending.urlToImage.isEmpty
               ? Image.asset(
                   'images/logo.png',
-                  height: 300,
+                  height: MediaQuery.of(context).size.height / 3.5,
                 )
               : CachedNetworkImage(
                   imageUrl: trending.urlToImage,
                   imageBuilder: (context, imageProvider) => Container(
                     width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.height / 3,
+                    height: MediaQuery.of(context).size.height / 3.5,
                     decoration: BoxDecoration(
                       image: DecorationImage(
                         image: imageProvider,
@@ -49,7 +50,6 @@ class TrendingCard extends StatelessWidget {
           ListTile(
             leading: Container(
               width: 40.0,
-              height: 40.0,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 image: DecorationImage(
@@ -74,19 +74,19 @@ class TrendingCard extends StatelessWidget {
             padding: const EdgeInsets.all(16.0),
             child: Text(
               ' ${trending.description.trimLeft()}',
-              style: TextStyle(color: Colors.black),
+              style: const TextStyle(color: Colors.black),
             ),
           ),
-          ButtonBar(
-            alignment: MainAxisAlignment.start,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Text(
-                'Published :${trending.publishedAt}',
+                'Published :${trending.publishedAt.substring(0, 10)}',
                 style: TextStyle(
                   color: Colors.black.withOpacity(0.6),
                 ),
               ),
-              TextButton(
+              ElevatedButton(
                 onPressed: () {
                   Navigator.push(
                     context,
@@ -100,7 +100,7 @@ class TrendingCard extends StatelessWidget {
                 },
                 child: const Text('View'),
               ),
-              TextButton(
+              ElevatedButton(
                 onPressed: () {
                   Share.share(trending.url);
                 },

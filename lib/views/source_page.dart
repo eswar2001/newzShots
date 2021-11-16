@@ -84,6 +84,7 @@ class _SourcePageState extends State<SourcePage> {
                   );
                 },
                 child: Card(
+                  elevation: 0,
                   child: Center(
                     child: Image.network(
                       'https://newzshots.herokuapp.com/img/${source[index]}',

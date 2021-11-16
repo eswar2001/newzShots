@@ -42,7 +42,7 @@ class _IndividualViewCategortPageState
             fontWeight: FontWeight.w600,
           ),
         ),
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.deepOrange,
       ),
       body: IndividualCategortPage(url: widget.url),
     );
