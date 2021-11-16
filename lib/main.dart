@@ -73,7 +73,7 @@ class _MyHomeState extends State<MyHome> {
           children: [
             const Text(
               'NewzShots - ',
-              style: TextStyle(color: Colors.black),
+              style: TextStyle(color: Colors.white),
             ),
             Text(
               titles[_currentIndex],
@@ -81,7 +81,7 @@ class _MyHomeState extends State<MyHome> {
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
                   fontStyle: FontStyle.italic,
-                  color: Colors.black),
+                  color: Colors.white),
             ),
           ],
         ),
@@ -110,7 +110,7 @@ class _MyHomeState extends State<MyHome> {
               child: IconButton(
                 icon: const Icon(
                   Icons.star,
-                  color: Colors.black,
+                  color: Colors.white,
                 ),
                 onPressed: () {
                   Navigator.push(
