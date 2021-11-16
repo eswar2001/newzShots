@@ -1,5 +1,6 @@
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:newzshots/views/category_page.dart';
 import 'package:newzshots/views/location_page.dart';
@@ -86,23 +87,43 @@ class _MyHomeState extends State<MyHome> {
         ),
         elevation: 0,
         actions: [
-          InkWell(
-            child: IconButton(
-              icon: const Icon(
-                Icons.star,
-                color: Colors.black,
-              ),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  CupertinoPageRoute(
-                    builder: (context) => const WebViewPage(
-                      intUrl: 'https://github.com/eswar2001/newzShots',
-                      title: 'Github',
+          // Padding(
+          //   padding: const EdgeInsets.all(8.0),
+          //   child: InkWell(
+          //     child: IconButton(
+          //       icon: const Icon(
+          //         Icons.search,
+          //         color: Colors.black,
+          //       ),
+          //       onPressed: () {
+          //         Navigator.push(
+          //           context,
+          //           CupertinoPageRoute(builder: (context) => CustomSearch()),
+          //         );
+          //       },
+          //     ),
+          //   ),
+          // ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: InkWell(
+              child: IconButton(
+                icon: const Icon(
+                  Icons.star,
+                  color: Colors.black,
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    CupertinoPageRoute(
+                      builder: (context) => const WebViewPage(
+                        intUrl: 'https://github.com/eswar2001/newzShots',
+                        title: 'Github',
+                      ),
                     ),
-                  ),
-                );
-              },
+                  );
+                },
+              ),
             ),
           )
         ],
