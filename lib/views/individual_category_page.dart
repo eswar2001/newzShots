@@ -130,7 +130,7 @@ class _IndividualCategortPageState extends State<IndividualCategortPage> {
           setState(() {
             isLoading = true;
           });
-          getData();
+          if (isSearching) await  getData();
           await Future.delayed(const Duration(seconds: 3));
           setState(() {
             isLoading = false;

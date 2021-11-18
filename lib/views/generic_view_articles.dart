@@ -124,7 +124,7 @@ class _GenericViewState extends State<GenericView> {
           setState(() {
             isLoading = true;
           });
-          await getData();
+          if (isSearching) await getData();
           // await Future.delayed(const Duration(seconds: 3));
           setState(() {
             isLoading = false;

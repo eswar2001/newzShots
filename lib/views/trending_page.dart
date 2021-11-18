@@ -86,7 +86,7 @@ class _TrendingPageState extends State<TrendingPage> {
           setState(() {
             isLoading = true;
           });
-          await getData();
+          if (isSearching) await getData();
           isSearching = !isSearching;
           // await Future.delayed(const Duration());
           setState(() {
