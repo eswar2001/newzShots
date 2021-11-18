@@ -27,7 +27,6 @@ class _IndividualViewCategortPageState
           child: IconButton(
             icon: const Icon(
               Icons.arrow_back_ios_rounded,
-              color: Colors.black,
             ),
             onPressed: () {
               Navigator.of(context).pop();
@@ -37,7 +36,6 @@ class _IndividualViewCategortPageState
         title: Text(
           widget.url.replaceAll('/category/', '').toUpperCase(),
           style: const TextStyle(
-            color: Colors.black,
             fontSize: 20,
             fontWeight: FontWeight.w600,
           ),
@@ -59,7 +57,10 @@ class IndividualCategortPage extends StatefulWidget {
 
 class _IndividualCategortPageState extends State<IndividualCategortPage> {
   bool isLoading = true;
+
+  bool isSearching = false;
   final ScrollController _scrollController = ScrollController();
+  List<CArticle> _foundArticles = [];
   List<CArticle> articles = [];
   getData() async {
     articles = [];
@@ -76,6 +77,7 @@ class _IndividualCategortPageState extends State<IndividualCategortPage> {
         if (mounted) {
           setState(() {
             isLoading = false;
+            _foundArticles = articles;
           });
         }
         //print('Number of articles about http: $itemCount.');
@@ -85,6 +87,24 @@ class _IndividualCategortPageState extends State<IndividualCategortPage> {
     } catch (e) {
       //print(e);
     }
+  }
+
+  void _runFilter(String enteredKeyword) {
+    List<CArticle> results = [];
+    if (enteredKeyword.isEmpty) {
+      results = articles;
+    } else {
+      results = articles
+          .where((user) =>
+              user.title.toLowerCase().contains(enteredKeyword.toLowerCase()) ||
+              user.description
+                  .toLowerCase()
+                  .contains(enteredKeyword.toLowerCase()))
+          .toList();
+    }
+    setState(() {
+      _foundArticles = results;
+    });
   }
 
   @override
@@ -114,16 +134,40 @@ class _IndividualCategortPageState extends State<IndividualCategortPage> {
           await Future.delayed(const Duration(seconds: 3));
           setState(() {
             isLoading = false;
+            isSearching = !isSearching;
           });
         },
-        child: ListView(
-          controller: _scrollController,
-          addAutomaticKeepAlives: true,
-          children: articles
-              .map((e) => CTrendingCard(
-                    trending: e,
-                  ))
-              .toList(),
+        child: Column(
+          children: [
+            isSearching
+                ? Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextField(
+                      onChanged: (value) => _runFilter(value),
+                      decoration: const InputDecoration(
+                        labelText: 'Search',
+                        suffixIcon: Icon(Icons.search),
+                      ),
+                    ),
+                  )
+                : const SizedBox(),
+            Expanded(
+              child: _foundArticles.isNotEmpty
+                  ? ListView(
+                      controller: _scrollController,
+                      addAutomaticKeepAlives: true,
+                      children: _foundArticles
+                          .map((e) => CTrendingCard(
+                                trending: e,
+                              ))
+                          .toList(),
+                    )
+                  : const Text(
+                      'No results found',
+                      style: TextStyle(fontSize: 24),
+                    ),
+            ),
+          ],
         ),
       );
     }

@@ -54,7 +54,10 @@ class GenericView extends StatefulWidget {
 
 class _GenericViewState extends State<GenericView> {
   bool isLoading = true;
+  bool isSearching = false;
   List<Article> articles = [];
+  final ScrollController _scrollController = ScrollController();
+  List<Article> _foundArticles = [];
   getData() async {
     articles = [];
     var response = await http.get(
@@ -69,12 +72,33 @@ class _GenericViewState extends State<GenericView> {
       if (mounted) {
         setState(() {
           isLoading = false;
+          _foundArticles = articles;
         });
       }
-      //print('Number of articles about http: $itemCount.');
+      print('Number of articles about http: $itemCount.');
     } else {
-      //print('Request failed with status: ${response.statusCode}.');
+      print('Request failed with status: ${response.statusCode}.');
     }
+  }
+
+  void _runFilter(String enteredKeyword) {
+    List<Article> results = [];
+    if (enteredKeyword.isEmpty) {
+      results = articles;
+    } else {
+      results = articles
+          .where((user) =>
+              user.content
+                  .toLowerCase()
+                  .contains(enteredKeyword.toLowerCase()) ||
+              user.description
+                  .toLowerCase()
+                  .contains(enteredKeyword.toLowerCase()))
+          .toList();
+    }
+    setState(() {
+      _foundArticles = results;
+    });
   }
 
   @override
@@ -100,19 +124,44 @@ class _GenericViewState extends State<GenericView> {
           setState(() {
             isLoading = true;
           });
-          getData();
-          await Future.delayed(const Duration(seconds: 3));
+          await getData();
+          // await Future.delayed(const Duration(seconds: 3));
           setState(() {
             isLoading = false;
+            isSearching = !isSearching;
           });
         },
-        child: ListView(
-          addAutomaticKeepAlives: true,
-          children: articles
-              .map((e) => TrendingCard(
-                    trending: e,
-                  ))
-              .toList(),
+        child: Column(
+          children: [
+            isSearching
+                ? Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextField(
+                      onChanged: (value) => _runFilter(value),
+                      decoration: const InputDecoration(
+                        labelText: 'Search',
+                        suffixIcon: Icon(Icons.search),
+                      ),
+                    ),
+                  )
+                : const SizedBox(),
+            Expanded(
+              child: _foundArticles.isNotEmpty
+                  ? ListView(
+                      controller: _scrollController,
+                      addAutomaticKeepAlives: true,
+                      children: _foundArticles
+                          .map((e) => TrendingCard(
+                                trending: e,
+                              ))
+                          .toList(),
+                    )
+                  : const Text(
+                      'No results found',
+                      style: TextStyle(fontSize: 24),
+                    ),
+            ),
+          ],
         ),
       );
     }
